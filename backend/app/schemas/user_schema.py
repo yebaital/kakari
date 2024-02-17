@@ -1,3 +1,6 @@
+from typing import Optional
+from uuid import UUID
+
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -7,3 +10,12 @@ class UserAuth(BaseModel):
                           description="User username")
     password: str = Field(..., min_length=6, max_length=24,
                           description="User password")
+
+
+class UserOut(BaseModel):
+    user_id: UUID
+    username: str
+    email: EmailStr
+    first_name: Optional[str]
+    last_name: Optional[str]
+    disabled: Optional[bool] = False
