@@ -2,7 +2,7 @@ import datetime
 from beanie import Document, Indexed
 from pydantic import Field, EmailStr
 from uuid import UUID, uuid4
-from typing import Optional
+from typing import Optional, List
 
 
 class User(Document):
@@ -13,6 +13,7 @@ class User(Document):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     disabled: Optional[bool] = None
+    roles: List[str] = Field(default_factory=list)
 
     def __repr__(self) -> str:
         return f"<User {self.email}>"
@@ -31,7 +32,6 @@ class User(Document):
     """
         If called on instance, gives us the date/time the user was created
     """
-
     @property
     def create(self) -> datetime:
         return self.id.generation_time
@@ -39,7 +39,6 @@ class User(Document):
     """
         Gets user by email
     """
-
     @classmethod
     async def by_email(self, email: str) -> "User":
         return await self.find_one(self.email == email)

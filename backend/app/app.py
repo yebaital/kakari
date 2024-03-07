@@ -1,16 +1,18 @@
+from beanie import init_beanie
 from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
-from app.core.config import settings
-from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
-from app.models.user_model import User
+
 from app.api.v1.router import router
+from app.core.config import settings
+from app.models.task_model import Task
+from app.models.user_model import User
 
 
 async def init():
     client = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING)
     db = client.kakari
-    await init_beanie(database=db, document_models=[User])
+    await init_beanie(database=db, document_models=[User, Task])
 
 
 @asynccontextmanager
