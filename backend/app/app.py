@@ -3,10 +3,10 @@ from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from api.v1.router import router
-from core.config import settings
-from models.task_model import Task
-from models.user_model import User
+from .api.v1.router import router
+from .core.config import settings
+from .models.task_model import Task
+from .models.user_model import User
 
 
 async def init():

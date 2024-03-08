@@ -88,3 +88,7 @@ async def delete_task(task_id: UUID):
     """
     await TaskService.delete_task(task_id=task_id)
     return None
+
+# TODO: add endpoint to get tasks by user
+# TODO: add endpoint to get overdue tasks
+# TODO: add endpoint to get tasks by due date
