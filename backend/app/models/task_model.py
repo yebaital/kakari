@@ -1,11 +1,13 @@
 from datetime import datetime
 from enum import Enum
-from typing import Any
+from typing import Any, List
 from uuid import UUID, uuid4
 
 from beanie import Document, Indexed, Link, Replace, before_event, Insert
 from pydantic import Field
 
+from app.models.project_model import Project
+from app.models.task_comment_model import TaskComment
 from app.models.user_model import User
 
 
@@ -26,6 +28,7 @@ class Task(Document):
     due_date: datetime = Field(default_factory=datetime.utcnow)
     task_creator: Link[User]
     task_assignee: Link[User] = None
+    comments: List[Link[TaskComment]] = []
 
     def __eq__(self, other: Any) -> bool:
         if isinstance(other, Task):

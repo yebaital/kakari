@@ -7,12 +7,11 @@ from typing import Optional, List
 
 class User(Document):
     user_id: UUID = Field(default_factory=uuid4)
-    username: Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
     hashed_password: str
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    full_name: Optional[str] = None
     disabled: Optional[bool] = None
+    activated: Optional[bool] = None
     roles: List[str] = Field(default_factory=list)
 
     def __repr__(self) -> str:

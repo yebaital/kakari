@@ -15,3 +15,6 @@ async def create_user(data: UserAuth):
     except pymongo.errors.DuplicateKeyError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="User with this email or username already exists")
+
+    # TODO: add endpoint to update user
+    # TODO: add endpoint to update user roles for admins only
