@@ -6,7 +6,6 @@ from uuid import UUID, uuid4
 from beanie import Document, Indexed, Link, Replace, before_event, Insert
 from pydantic import Field
 
-from app.models.project_model import Project
 from app.models.task_comment_model import TaskComment
 from app.models.user_model import User
 

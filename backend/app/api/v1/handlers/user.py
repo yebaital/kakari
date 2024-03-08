@@ -18,3 +18,4 @@ async def create_user(data: UserAuth):
 
     # TODO: add endpoint to update user
     # TODO: add endpoint to update user roles for admins only
+    # TODO: add endpoint to update user password

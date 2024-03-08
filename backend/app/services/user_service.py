@@ -72,13 +72,11 @@ class UserService:
         return user
 
     @classmethod
-    async def update_user_by_id(cls, user_id: UUID, current_user: Depends(get_current_user),
-                                user_update: UserUpdate) -> User:
+    async def update_user_by_id(cls, user_id: UUID, user_update: UserUpdate) -> User:
         """
         Update user by ID.
 
         :param user_id: The ID of the user to update.
-        :param current_user: An instance of the current user.
         :param user_update: The updated user information.
         :return: The updated user object.
         """
