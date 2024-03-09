@@ -1,7 +1,10 @@
+import secrets
 import uuid
 from datetime import datetime
 from typing import Union
 from uuid import UUID
+
+from app.models.user_model import User
 
 
 def validate_uuid(id: UUID):
@@ -42,3 +45,12 @@ def validate_date(date: Union[str, datetime]):
         return date
     else:
         raise TypeError(f"Invalid date type: {type(date)}, expected string or datetime")
+
+
+def generate_password_reset_token() -> str:
+    """
+    Generates a password reset token.
+
+    :return: A string representing the password reset token.
+    """
+    return secrets.token_hex(16)

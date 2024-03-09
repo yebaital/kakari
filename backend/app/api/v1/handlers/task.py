@@ -107,7 +107,6 @@ async def get_assigned_tasks(user_id: UUID) -> List[Task]:
     return await TaskService.list_tasks_by_assignee_id(user_id)
 
 
-# TODO: add endpoint to get overdue tasks
 @task_router.get('/overdue', summary="Get all overdue tasks")
 async def get_all_overdue_tasks() -> List[Task]:
     """

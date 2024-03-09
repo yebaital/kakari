@@ -168,15 +168,12 @@ class TaskService:
         # Validate the date
         validated_date = validate_date(date)
 
-        # Query the database to find tasks that are due on the specified date
-        tasks = Task.find(Task.due_date == validated_date).to_list()
-
         # Construct a datetime range for the entire day
         start_of_day = datetime.combine(validated_date, time.min)
         end_of_day = datetime.combine(validated_date, time.max)
 
         # Query the database to find tasks that are due on the specified date, regardless of time
-        tasks = Task.find(Task.due_date >= start_of_day, Task.due_date <= end_of_day).to_list()
+        tasks = await Task.find(Task.due_date >= start_of_day, Task.due_date <= end_of_day).to_list()
 
         return tasks
 
