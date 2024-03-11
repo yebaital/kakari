@@ -2,9 +2,9 @@ from typing import List
 from uuid import UUID
 
 import pymongo.errors
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, HTTPException, status
 
-from app.api.deps.user_deps import get_current_user
+from app.models.user_model import User
 from app.schemas.password_reset_schema import PasswordResetSchema
 from app.schemas.user_schema import UserAuth
 from app.schemas.user_schema import UserOut, UserUpdate
@@ -36,7 +36,7 @@ async def create_user(data: UserAuth):
 
 
 @user_router.put('/', summary="Update user", response_model=UserOut)
-async def update_user(user_id: UUID, data: UserUpdate):
+async def update_user(user_id: UUID, data: UserUpdate, current_user: User):
     """
     Update user.
 
@@ -48,11 +48,11 @@ async def update_user(user_id: UUID, data: UserUpdate):
     - UserOut: The updated user.
     """
     validate_uuid(user_id)
-    return await UserService.update_user_by_id(user_id=user_id, user_update=data)
+    return await UserService.update_user_by_id(user_id=user_id, user_update=data, current_user=current_user)
 
 
 @user_router.put('/update-roles/{user_id}', summary="Update user roles", response_model=UserOut)
-async def update_user_roles(user_id: UUID, roles: List[str], current_user: Depends(get_current_user)):
+async def update_user_roles(user_id: UUID, roles: List[str], current_user: User):
     """
     Update User Roles
 

@@ -8,7 +8,6 @@ from pydantic import ValidationError
 from app.core.config import settings
 from app.models.user_model import User
 from app.schemas.auth_schema import TokenPayload
-from app.services.user_service import UserService
 
 reuseable_oauth = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/auth/login",
@@ -26,6 +25,7 @@ async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
     :rtype: User
     :raises HTTPException: If the token is invalid or expired, or if the user cannot be found.
     """
+    from app.services.user_service import UserService
     try:
         payload = jwt.decode(
             token=token, key=settings.JWT_SECRET_KEY, algorithms=[settings.ALGORITHM]

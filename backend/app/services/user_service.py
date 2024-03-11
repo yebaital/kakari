@@ -76,7 +76,8 @@ class UserService:
 
     @classmethod
     async def update_user_by_id(cls, user_id: UUID, user_update: UserUpdate,
-                                current_user=Depends(get_current_user)) -> User:
+                                current_user: User = Depends(get_current_user)) -> User:
+
         """
         Updates a user by their ID.
 
@@ -105,7 +106,7 @@ class UserService:
         return user
 
     @classmethod
-    async def update_user_roles(cls, user_id: UUID, current_user: User,
+    async def update_user_roles(cls, user_id: UUID, current_user: Depends(get_current_user),
                                 user_roles: List[str]) -> User:
         """
             Update User Roles method.
