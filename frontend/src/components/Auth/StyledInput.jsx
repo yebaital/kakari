@@ -1,6 +1,6 @@
-import { Input } from "@chakra-ui/react";
+import {Input} from "@chakra-ui/react";
 
-const StyledInput = ({ placeholder, type, size = 'lg', register, marginTop = '6' }) => {
+const StyledInput = ({placeholder, type, size = 'lg', register, marginTop = '6'}) => {
     const sharedStyles = {
         width: '352px',
         height: '48px',

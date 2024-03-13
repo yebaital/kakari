@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import StyledInput from "./StyledInput";
 import StyledButton from "./StyledButton";
 
-export const Login = () => {
+export const Register = () => {
     const {
         handleSubmit,
         register,
@@ -22,7 +22,7 @@ export const Login = () => {
         {/* Left side */}
         <Box flex="1" backgroundColor="#017BD6">
             <Center height="100%">
-                <Image src={`${process.env.PUBLIC_URL}/login.webp`} alt="Login Image" objectFit="cover" width="400px"/>
+                <Image src={`${process.env.PUBLIC_URL}/register.webp`} alt="Register Image" objectFit="cover" width="400px"/>
             </Center>
         </Box>
 
@@ -33,11 +33,23 @@ export const Login = () => {
                     <Box width="50%">
                         <Box marginBottom="1rem" paddingLeft="2rem">
                             <Text textAlign="center" fontWeight="bold" fontSize="2xl" color="#ffffff">
-                                Log In
+                                Register
                             </Text>
                         </Box>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <FormControl isInvalid={errors.email}>
+                                <StyledInput
+                                    placeholder="Full name"
+                                    type="text"
+                                    size="lg"
+                                    marginTop="6"
+                                    register={register("fullname", {
+                                        required: "This is a required field",
+                                    })}
+                                />
+                                <FormErrorMessage>
+                                    {errors.fullname && <span>{errors.fullname.message}</span>}
+                                </FormErrorMessage>
                                 <StyledInput
                                     placeholder="Email"
                                     type="email"
@@ -61,17 +73,29 @@ export const Login = () => {
                                         required: "This is a required field",
                                     })}
                                 />
+                                <StyledInput
+                                    placeholder="Verify Password"
+                                    type="password"
+                                    size="lg"
+                                    marginTop="6"
+                                    register={register("verifypassword", {
+                                        required: "This is a required field",
+                                    })}
+                                />
+                                <FormErrorMessage>
+                                    {errors.verifypassword && <span>{errors.verifypassword.message}</span>}
+                                </FormErrorMessage>
                                 <FormErrorMessage>
                                     {errors.password && <span>{errors.password.message}</span>}
                                 </FormErrorMessage>
                             </FormControl>
                             <StyledButton type="submit" mt={6} onClick={() => alert('Button Clicked')}>
-                                Login
+                                Register
                             </StyledButton>
                             <Box display="flex" justifyContent="center" alignItems="center" paddingLeft="5rem" mt={4}>
-                                <Link type="submit" onClick={() => navigate("/register", {replace: true})}>
+                                <Link type="submit" onClick={() => navigate("/login", {replace: true})}>
                                     <Text color="blue.500">
-                                        Register Instead
+                                        Login Instead
                                     </Text>
                                 </Link>
                             </Box>
