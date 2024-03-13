@@ -8,7 +8,11 @@ export const Register = () => {
     const {
         handleSubmit,
         register,
-        formState: {errors, isSubmitting}
+        getValues,
+        formState: {
+            errors,
+            isSubmitting
+        }
     } = useForm();
 
     const onSubmit = (values) => {
@@ -22,7 +26,8 @@ export const Register = () => {
         {/* Left side */}
         <Box flex="1" backgroundColor="#017BD6">
             <Center height="100%">
-                <Image src={`${process.env.PUBLIC_URL}/register.webp`} alt="Register Image" objectFit="cover" width="400px"/>
+                <Image src={`${process.env.PUBLIC_URL}/register.webp`} alt="Register Image" objectFit="cover"
+                       width="400px"/>
             </Center>
         </Box>
 
@@ -30,8 +35,8 @@ export const Register = () => {
         <Box flex="1" padding="12" backgroundColor="#161616">
             <Center height="100%" width="full">
                 <VStack spacing="8" width="full">
-                    <Box width="50%">
-                        <Box marginBottom="1rem" paddingLeft="2rem">
+                    <Box width="50%" textAlign="center">
+                        <Box marginBottom="1rem">
                             <Text textAlign="center" fontWeight="bold" fontSize="2xl" color="#ffffff">
                                 Register
                             </Text>
@@ -69,31 +74,49 @@ export const Register = () => {
                                     type="password"
                                     size="lg"
                                     marginTop="6"
-                                    register={register("password", {
-                                        required: "This is a required field",
-                                    })}
+                                    register={
+                                        register("password", {
+                                            required: "This is a required field",
+                                            minLength: {
+                                                value: 6,
+                                                message: "Password should be at least 6 characters long"
+                                            },
+                                            maxLength: {
+                                                value: 24,
+                                                message: "Password should be at most 24 characters long"
+                                            }
+                                        })
+                                    }
                                 />
                                 <StyledInput
                                     placeholder="Verify Password"
                                     type="password"
                                     size="lg"
                                     marginTop="6"
-                                    register={register("verifypassword", {
-                                        required: "This is a required field",
-                                    })}
+                                    register={
+                                        register("verifyPassword", {
+                                            required: "This is a required field",
+                                            validate: {
+                                                matchesPreviousPassword: (value) => {
+                                                    const {password} = getValues();
+                                                    return password === value || "Passwords should match!";
+                                                }
+                                            }
+                                        })
+                                    }
                                 />
                                 <FormErrorMessage>
-                                    {errors.verifypassword && <span>{errors.verifypassword.message}</span>}
+                                    {errors.password && <span>{errors.password.message}</span>}
                                 </FormErrorMessage>
                                 <FormErrorMessage>
-                                    {errors.password && <span>{errors.password.message}</span>}
+                                    {errors.verifyPassword && <span>{errors.verifyPassword.message}</span>}
                                 </FormErrorMessage>
                             </FormControl>
                             <StyledButton type="submit" mt={6} onClick={() => alert('Button Clicked')}>
                                 Register
                             </StyledButton>
-                            <Box display="flex" justifyContent="center" alignItems="center" paddingLeft="5rem" mt={4}>
-                                <Link type="submit" onClick={() => navigate("/login", {replace: true})}>
+                            <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
+                                <Link onClick={() => navigate("/login", {replace: true})}>
                                     <Text color="blue.500">
                                         Login Instead
                                     </Text>

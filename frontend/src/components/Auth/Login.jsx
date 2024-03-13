@@ -1,4 +1,4 @@
-import {Box, Center, Flex, FormControl, FormErrorMessage, Image, VStack, Text, Link} from "@chakra-ui/react";
+import {Box, Center, Flex, FormControl, FormErrorMessage, Image, Link, Text, VStack} from "@chakra-ui/react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import StyledInput from "./StyledInput";
@@ -30,10 +30,10 @@ export const Login = () => {
         <Box flex="1" padding="12" backgroundColor="#161616">
             <Center height="100%" width="full">
                 <VStack spacing="8" width="full">
-                    <Box width="50%">
-                        <Box marginBottom="1rem" paddingLeft="2rem">
+                    <Box width="50%" textAlign="center">
+                        <Box marginBottom="1rem">
                             <Text textAlign="center" fontWeight="bold" fontSize="2xl" color="#ffffff">
-                                Log In
+                                Login
                             </Text>
                         </Box>
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -68,8 +68,8 @@ export const Login = () => {
                             <StyledButton type="submit" mt={6} onClick={() => alert('Button Clicked')}>
                                 Login
                             </StyledButton>
-                            <Box display="flex" justifyContent="center" alignItems="center" paddingLeft="5rem" mt={4}>
-                                <Link type="submit" onClick={() => navigate("/register", {replace: true})}>
+                            <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
+                                <Link onClick={() => navigate("/register", {replace: true})}>
                                     <Text color="blue.500">
                                         Register Instead
                                     </Text>
