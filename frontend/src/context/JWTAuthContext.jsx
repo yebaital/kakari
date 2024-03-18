@@ -125,7 +125,7 @@ export const AuthProvider = (props) => {
     const getTokens = async (email, password) => {
         const formData = new FormData()
         formData.append("username", email)
-        formData.password("password", password)
+        formData.append("password", password)
         try {
             const response = await axiosInstance.post("/auth/login", formData)
             setSession(response.data.access_token, response.data.refresh_token)
