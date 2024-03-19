@@ -23,7 +23,7 @@ import {Controller, useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import axiosInstance from "../../services/axios";
 
-export const AddUpdateTodoModal = ({
+export const AddUpdateTaskModal = ({
                                        editable = false,
                                        defaultValues = {},
                                        onSuccess = () => {

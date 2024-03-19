@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode'
+import { jwtDecode as jwt_decode } from 'jwt-decode'
 
 /**
  * Function to validate a token.

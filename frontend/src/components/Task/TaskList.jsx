@@ -4,7 +4,7 @@ import axiosInstance from "../../services/axios";
 import {AddUpdateTaskModal} from "./AddUpdateTaskModal";
 import {TodoCard} from "./TaskCard";
 
-export const TodoList = () => {
+export const TaskList = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const isMounted = useRef(false);

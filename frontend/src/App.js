@@ -9,7 +9,7 @@ import {Authenticated} from "./components/Auth/Authenticated";
 import {Login} from "./components/Auth/Login";
 import {PublicRoute} from "./components/Auth/PublicRoute";
 import {Register} from "./components/Auth/Register";
-import {NavBar} from "./components/Navbar/NavBar";
+import {NavBar} from "./components/Navbar/Navbar";
 import {TaskDetail} from "./components/Task/TaskDetail";
 import {TaskList} from "./components/Task/TaskList";
 import {AuthConsumer, AuthProvider} from "./context/JWTAuthContext";

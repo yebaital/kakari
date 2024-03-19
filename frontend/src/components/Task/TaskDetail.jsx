@@ -12,7 +12,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import axiosInstance from "../../services/axios";
 import {AddUpdateTaskModal} from "./AddUpdateTaskModal";
 
-export const TodoDetail = () => {
+export const TaskDetail = () => {
     const [task, setTask] = useState({});
     const [loading, setLoading] = useState(true);
     const isMounted = useRef(false);
@@ -25,7 +25,7 @@ export const TodoDetail = () => {
         if (isMounted.current) return;
         fetchTask();
         isMounted.current = true;
-    }, [todoId]);
+    }, [taskId]);
 
     const fetchTask = () => {
         setLoading(true);

@@ -1,5 +1,5 @@
 import { useAuth } from "../../hooks/useAuth";
-import {Box, Button, Flex, Stack, useColorModeValue} from "@chakra-ui/react";
+import {Box, Button, Flex, Stack, useColorModeValue, Text} from "@chakra-ui/react";
 import {Outlet} from "react-router-dom";
 
 export const NavBar = () => {
