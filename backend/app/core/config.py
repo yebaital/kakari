@@ -14,10 +14,12 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRATION_MINUTES: int = 60 * 24 * 7
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
     PROJECT_NAME: str = "KAKARI"
-    MONGO_CONNECTION_STRING: str = config("MONGO_CONNECTION_STRING", cast=str)
+    MONGO_USERNAME: str = config("MONGO_USERNAME", cast=str)
+    MONGO_PASSWORD: str = config("MONGO_PASSWORD", cast=str)
     MAILTRAP_USERNAME: str = config("MAILTRAP_USERNAME")
     MAILTRAP_PASSWORD: str = config("MAILTRAP_PASSWORD")
     BASE_URL: str = config("BASE_URL")
+    DOMAIN: str = config("DOMAIN")
 
 
 class Config:
