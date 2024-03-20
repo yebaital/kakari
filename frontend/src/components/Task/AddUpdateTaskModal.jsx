@@ -24,15 +24,12 @@ import {useParams} from "react-router-dom";
 import axiosInstance from "../../services/axios";
 
 export const AddUpdateTaskModal = ({
-                                       editable = false,
-                                       defaultValues = {},
-                                       onSuccess = () => {
-                                       },
-                                       ...rest
+                                       editable = false, defaultValues = {}, onSuccess = () => {
+    }, ...rest
                                    }) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const toast = useToast();
-    const {todoId} = useParams();
+    const {taskId} = useParams();
     const {
         handleSubmit,
         register,
@@ -45,15 +42,15 @@ export const AddUpdateTaskModal = ({
     const onSubmit = async (values) => {
         try {
             if (editable) {
-                await axiosInstance.put(`/todo/${todoId}`, values);
+                await axiosInstance.put(`/task/tasks/${taskId}`, values);
             } else {
-                await axiosInstance.post(`/todo/create/`, values);
+                await axiosInstance.post(`/taskcreate/`, values);
             }
             toast({
-                title: editable ? "Todo Updated" : "Todo Added",
+                title: editable ? "Task Updated" : "Task Added",
                 status: "success",
                 isClosable: true,
-                diration: 1500,
+                duration: 1500,
             });
             onSuccess();
             onClose();
@@ -63,7 +60,7 @@ export const AddUpdateTaskModal = ({
                 title: "Something went wrong. Please try again.",
                 status: "error",
                 isClosable: true,
-                diration: 1500,
+                duration: 1500,
             });
         }
     };
@@ -71,7 +68,7 @@ export const AddUpdateTaskModal = ({
     return (
         <Box {...rest}>
             <Button w="100%" colorScheme="green" onClick={onOpen}>
-                {editable ? "UPDATE FODO" : "ADD FODO"}
+                {editable ? "UPDATE TASK" : "ADD TASK"}
             </Button>
             <Modal
                 closeOnOverlayClick={false}
@@ -83,12 +80,12 @@ export const AddUpdateTaskModal = ({
                 <ModalOverlay/>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <ModalContent>
-                        <ModalHeader>{editable ? "Update Fodo" : "ADD FODO"}</ModalHeader>
+                        <ModalHeader>{editable ? "Update Task" : "ADD TASK"}</ModalHeader>
                         <ModalCloseButton/>
                         <ModalBody>
                             <FormControl isInvalid={errors.title}>
                                 <Input
-                                    placeholder="Todo Title...."
+                                    placeholder="Task Title...."
                                     background={useColorModeValue("gray.300", "gray.600")}
                                     type="text"
                                     variant="filled"

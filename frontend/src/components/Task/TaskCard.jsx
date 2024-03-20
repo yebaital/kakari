@@ -1,7 +1,7 @@
 import {Badge, Flex, Text, useColorModeValue} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
 
-export const TodoCard = ({todo}) => {
+export const TaskCard = ({task}) => {
     const navigate = useNavigate();
     return (
         <Flex
@@ -17,11 +17,11 @@ export const TodoCard = ({todo}) => {
                 cursor: "pointer",
                 transform: "translateY(-3px)",
             }}
-            onClick={() => navigate(`/${todo.todo_id}`, {replace: true})}
+            onClick={() => navigate(`/${task.task_id}`, {replace: true})}
         >
-            <Text>{todo.title}</Text>
-            <Badge colorScheme={todo.status ? "green" : "purple"}>
-                {todo.status ? "Complete" : "Pending"}
+            <Text>{task.title}</Text>
+            <Badge colorScheme={task.status ? "green" : "purple"}>
+                {task.status ? "Complete" : "Pending"}
             </Badge>
         </Flex>
     );

@@ -25,7 +25,6 @@ class UserService:
         :rtype: User
         """
         user_in = User(
-            username=user.username,
             email=user.email,
             hashed_password=get_password(user.password),
             roles=user.roles

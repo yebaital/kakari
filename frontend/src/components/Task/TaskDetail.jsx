@@ -30,7 +30,7 @@ export const TaskDetail = () => {
     const fetchTask = () => {
         setLoading(true);
         axiosInstance
-            .get(`/task/${taskId}`)
+            .get(`/task/tasks/${taskId}`)
             .then((res) => {
                 setTask(res.data);
             })
@@ -43,7 +43,7 @@ export const TaskDetail = () => {
     const deleteTask = () => {
         setLoading(true);
         axiosInstance
-            .delete(`/task/${taskId}`)
+            .delete(`/task/tasks/${taskId}`)
             .then(() => {
                 toast({
                     title: "Task deleted successfully",

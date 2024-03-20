@@ -1,21 +1,32 @@
-import {Box, Center, Flex, FormControl, FormErrorMessage, Image, Link, Text, VStack} from "@chakra-ui/react";
+import {Box, Center, Flex, FormControl, FormErrorMessage, Image, Link, Text, VStack, useToast} from "@chakra-ui/react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import StyledInput from "./StyledInput";
 import StyledButton from "./StyledButton";
+import {useAuth} from "../../hooks/useAuth";
 
 export const Login = () => {
     const {
         handleSubmit,
         register,
-        formState: {errors, isSubmitting}
+        formState: { errors, isSubmitting },
     } = useForm();
+    const navigate = useNavigate();
+    const { login } = useAuth();
+    const toast = useToast();
 
-    const onSubmit = (values) => {
-        console.log(values)
-    }
-
-    const navigate = useNavigate()
+    const onSubmit = async (values) => {
+        try {
+            await login(values.email, values.password);
+        } catch (error) {
+            toast({
+                title: "Invalid email or password",
+                status: "error",
+                isClosable: true,
+                duration: 1500,
+            });
+        }
+    };
 
     return <Flex width="full" height="100vh">
 
@@ -65,7 +76,7 @@ export const Login = () => {
                                     {errors.password && <span>{errors.password.message}</span>}
                                 </FormErrorMessage>
                             </FormControl>
-                            <StyledButton type="submit" mt={6} onClick={() => alert('Button Clicked')}>
+                            <StyledButton type="submit" mt={6}>
                                 Login
                             </StyledButton>
                             <Box display="flex" justifyContent="center" alignItems="center" mt={4}>

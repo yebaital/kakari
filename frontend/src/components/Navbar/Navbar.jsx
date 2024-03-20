@@ -16,7 +16,7 @@ export const NavBar = () => {
                 color="white"
             >
                 <Text as="h2" fontSize={24} fontWeight="bold">
-                    FODOIST
+                    KAKARI
                 </Text>
                 <Stack direction="row" align="center" spacing={4}>
                     <Button onClick={logout} colorScheme="green">

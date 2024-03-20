@@ -2,7 +2,7 @@ import {Box, Center, Container, Spinner} from "@chakra-ui/react";
 import {useEffect, useRef, useState} from "react";
 import axiosInstance from "../../services/axios";
 import {AddUpdateTaskModal} from "./AddUpdateTaskModal";
-import {TodoCard} from "./TaskCard";
+import {TaskCard} from "./TaskCard";
 
 export const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -46,7 +46,7 @@ export const TaskList = () => {
             ) : (
                 <Box mt={6}>
                     {tasks?.map((task) => (
-                        <TodoCard todo={task} key={task.id}/>
+                        <TaskCard task={task} key={task.id}/>
                     ))}
                 </Box>
             )}

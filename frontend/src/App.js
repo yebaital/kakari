@@ -63,7 +63,7 @@ function App() {
                                             }
                                         />
                                         <Route
-                                            path="/:todoId"
+                                            path="/:taskId"
                                             element={
                                                 <Authenticated>
                                                     <TaskDetail/>
