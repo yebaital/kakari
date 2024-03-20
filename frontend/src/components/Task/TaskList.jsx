@@ -3,11 +3,14 @@ import {useEffect, useRef, useState} from "react";
 import axiosInstance from "../../services/axios";
 import {AddUpdateTaskModal} from "./AddUpdateTaskModal";
 import {TaskCard} from "./TaskCard";
+import jwtDecode from 'jwt-decode';
 
 export const TaskList = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const isMounted = useRef(false);
+
+    const user = useSelector
 
     useEffect(() => {
         if (isMounted.current) return;
@@ -18,7 +21,7 @@ export const TaskList = () => {
     const fetchTasks = () => {
         setLoading(true);
         axiosInstance
-            .get("/task/")
+            .get("/task/assigned/{user_id}")
             .then((res) => {
                 setTasks(res.data);
             })
