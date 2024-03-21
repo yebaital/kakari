@@ -10,7 +10,7 @@ export const TaskList = () => {
     const [loading, setLoading] = useState(true);
     const isMounted = useRef(false);
 
-    const user = useSelector
+    // const user = useSelector
 
     useEffect(() => {
         if (isMounted.current) return;

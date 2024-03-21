@@ -1,9 +1,14 @@
-import { useAuth } from "../../hooks/useAuth";
-import {Box, Button, Flex, Stack, useColorModeValue, Text} from "@chakra-ui/react";
+import {Box, Button, Flex, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {Outlet} from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import {logout} from '../../actions/authActions'
 
 export const NavBar = () => {
-    const { logout } = useAuth();
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        console.log("Logging out...");
+        dispatch(logout());
+    }
     return (
         <Box minHeight="100vh">
             <Flex
@@ -19,12 +24,12 @@ export const NavBar = () => {
                     KAKARI
                 </Text>
                 <Stack direction="row" align="center" spacing={4}>
-                    <Button onClick={logout} colorScheme="green">
+                    <Button onClick={handleLogout} colorScheme="green">
                         Logout
                     </Button>
                 </Stack>
             </Flex>
-            <Outlet />
+            <Outlet/>
         </Box>
     );
 };

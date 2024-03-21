@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const PublicRoute = (props) => {
     const { children } = props;
-    const auth = useAuth();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const navigate = useNavigate();
-    const location = useLocation();
-    const [isVerified, setIsVerified] = useState(false);
 
     useEffect(() => {
-        if (auth.isAuthenticated) {
-            navigate("/", { replace: true, state: { from: location } });
-        } else {
-            setIsVerified(true);
+        if (isAuthenticated) {
+            navigate('/', { replace: true });
         }
-    }, [auth.isAuthenticated, location, navigate]);
+    }, [isAuthenticated, navigate]);
 
-    if (!isVerified) {
-        return null;
-    }
-    return <>{children}</>;
-};
+    return !isAuthenticated ? <>{children}</> : null;
+}

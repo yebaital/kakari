@@ -1,32 +1,39 @@
-import {Box, Center, Flex, FormControl, FormErrorMessage, Image, Link, Text, VStack, useToast} from "@chakra-ui/react";
+import {Box, Center, Flex, FormControl, FormErrorMessage, Image, Link, Text, useToast, VStack} from "@chakra-ui/react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import StyledInput from "./StyledInput";
 import StyledButton from "./StyledButton";
-import {useAuth} from "../../hooks/useAuth";
+import {login} from "../../actions/authActions";
+import {useDispatch, useSelector} from "react-redux";
 
 export const Login = () => {
     const {
         handleSubmit,
         register,
-        formState: { errors, isSubmitting },
+        formState: {errors},
     } = useForm();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { login } = useAuth();
+
+    const onSubmit = (values) => {
+        dispatch(login(values.email, values.password));
+    };
+
+    const {isAuthenticated, user, loading, error} = useSelector(
+        (state) => state.auth
+    );
+
     const toast = useToast();
 
-    const onSubmit = async (values) => {
-        try {
-            await login(values.email, values.password);
-        } catch (error) {
-            toast({
-                title: "Invalid email or password",
-                status: "error",
-                isClosable: true,
-                duration: 1500,
-            });
-        }
-    };
+    // Check for error
+    if (error) {
+        toast({
+            title: "Invalid email or password",
+            status: "error",
+            isClosable: true,
+            duration: 1500,
+        });
+    }
 
     return <Flex width="full" height="100vh">
 

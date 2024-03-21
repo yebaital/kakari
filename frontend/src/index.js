@@ -1,14 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import { createRoot } from 'react-dom/client';
 import App from './App';
-import {ChakraProvider} from '@chakra-ui/react'
+import { Provider } from 'react-redux';
+import authReducer from './reducers/authReducer';
+import { ChakraProvider } from "@chakra-ui/react";
+import { configureStore } from '@reduxjs/toolkit';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-        <ChakraProvider>
+
+const store = configureStore({
+    reducer: {
+        auth: authReducer,
+    },
+});
+
+createRoot(
+    document.getElementById('root')
+).render(
+    <ChakraProvider>
+        <Provider store={store}>
             <App/>
-        </ChakraProvider>
-    </React.StrictMode>
-);
+        </Provider>,
+    </ChakraProvider>
+)
