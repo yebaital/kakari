@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import axiosInstance from "../../services/axios";
 import {AddUpdateTaskModal} from "./AddUpdateTaskModal";
 import {TaskCard} from "./TaskCard";
-import jwtDecode from 'jwt-decode';
+import {useSelector} from "react-redux";
 
 export const TaskList = () => {
     const [tasks, setTasks] = useState([]);

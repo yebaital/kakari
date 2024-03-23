@@ -11,7 +11,10 @@ import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {initialize} from './actions/authActions';
 import {Authenticated} from "./components/Auth/Authenticated";
+import {Dashboard} from "./components/Dashboard/Dashboard";
 
+
+//FIXME: User undefined
 function App() {
     const authInitialized = useSelector(state => state.auth.isInitialized);
     const dispatch = useDispatch();
@@ -57,7 +60,7 @@ function App() {
                     <Route path="/" element={<NavBar/>}>
                         <Route path="/" element={
                             <Authenticated>
-                                <TaskList/>
+                                <Dashboard/>
                             </Authenticated>
                         }
                         />

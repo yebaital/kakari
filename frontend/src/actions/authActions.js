@@ -8,7 +8,7 @@ export const initialize = () => async (dispatch) => {
 
         if (accessToken && validateToken(accessToken)) {
             axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-            const response = await axiosInstance.get("/api/v1/user/me");
+            const response = await axiosInstance.get("/user/me");
             const {data: user} = response;
 
             dispatch({
