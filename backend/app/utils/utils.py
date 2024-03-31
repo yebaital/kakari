@@ -7,16 +7,16 @@ from uuid import UUID
 from app.models.user_model import User
 
 
-def validate_uuid(id: UUID):
+def validate_uuid(uuid_obj: Union[UUID, str]):
     """
-    Validates the provided task ID for
-    correct UUID format.
+    Validates the given UUID object.
 
-    :param id: The task ID to be validated.
-    :raises ValueError: If an invalid task_id is provided.
+    :param uuid_obj: The UUID object to validate as either a UUID instance or a string.
+    :type uuid_obj: Union[UUID, str]
+    :raises ValueError: If the UUID object is invalid.
     """
     try:
-        uuid.UUID(id)
+        uuid.UUID(str(uuid_obj))
     except ValueError:
         raise ValueError("Invalid task id provided.")
 

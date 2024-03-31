@@ -9,18 +9,11 @@ export const Dashboard = () => {
     const [tasks, setTasks] = useState({});
     const isMounted = useRef(false);
 
-
-    const userId = useSelector(state => state.auth.user && state.auth.user.id);
-    const user = useSelector(state => state.auth.user );
-
-    useEffect(() => {
-        if (user) console.log(user)
-
-
-    }, []);
+    const userId = useSelector(state => state.auth.user && state.auth.user.user_id);
 
     useEffect(() => {
         if (isMounted.current) return;
+        console.log(userId)
         fetchTasks();
         isMounted.current = true;
     }, [userId]);

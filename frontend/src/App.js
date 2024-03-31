@@ -1,20 +1,18 @@
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "./components/Auth/Login";
 import {PublicRoute} from "./components/Auth/PublicRoute";
 import {Register} from "./components/Auth/Register";
 import {NavBar} from "./components/Navbar/Navbar";
 import {TaskDetail} from "./components/Task/TaskDetail";
-import {TaskList} from "./components/Task/TaskList";
 import {Flex, Spinner} from "@chakra-ui/react";
 import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
 import {initialize} from './actions/authActions';
 import {Authenticated} from "./components/Auth/Authenticated";
 import {Dashboard} from "./components/Dashboard/Dashboard";
+import {Sidebar} from "./components/Sidebar/Sidebar";
 
 
-//FIXME: User undefined
 function App() {
     const authInitialized = useSelector(state => state.auth.isInitialized);
     const dispatch = useDispatch();
@@ -60,6 +58,7 @@ function App() {
                     <Route path="/" element={<NavBar/>}>
                         <Route path="/" element={
                             <Authenticated>
+                                <Sidebar/>
                                 <Dashboard/>
                             </Authenticated>
                         }
