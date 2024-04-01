@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Box, Flex} from "@chakra-ui/react";
-import {Sidebar} from "./Sidebar/Sidebar";
-import {NavBar} from "./Navbar/Navbar";
+import {Sidebar} from "./Sidebar";
+import {NavBar} from "../Navbar/Navbar";
 
 export const AppLayout = ({children}) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -10,7 +10,7 @@ export const AppLayout = ({children}) => {
         setIsCollapsed(!isCollapsed);
     };
 
-    const sidebarWidth = isCollapsed ? 'iconWidth' : '200px'; // Adjust depending on the width of your icons
+    const sidebarWidth = isCollapsed ? 'iconWidth' : '232px'; // Adjust depending on the width of your icons
 
     return (
         <Flex direction="row" h="100vh">
@@ -21,7 +21,7 @@ export const AppLayout = ({children}) => {
 
             {/* Main Content */}
             <Box flexGrow={1}>
-                <Box p='4'>
+                <Box>
                     <NavBar/>
                     {children}
                 </Box>

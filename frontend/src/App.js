@@ -9,7 +9,7 @@ import {useEffect} from 'react';
 import {initialize} from './actions/authActions';
 import {Authenticated} from "./components/Auth/Authenticated";
 import {Dashboard} from "./components/Dashboard/Dashboard";
-import {AppLayout} from "./components/AppLayout";
+import {AppLayout} from "./components/AppLayout/AppLayout";
 
 
 function App() {
