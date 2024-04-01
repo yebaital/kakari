@@ -3,14 +3,13 @@ import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom
 import {Login} from "./components/Auth/Login";
 import {PublicRoute} from "./components/Auth/PublicRoute";
 import {Register} from "./components/Auth/Register";
-import {NavBar} from "./components/Navbar/Navbar";
 import {TaskDetail} from "./components/Task/TaskDetail";
 import {Flex, Spinner} from "@chakra-ui/react";
 import {useEffect} from 'react';
 import {initialize} from './actions/authActions';
 import {Authenticated} from "./components/Auth/Authenticated";
 import {Dashboard} from "./components/Dashboard/Dashboard";
-import {Sidebar} from "./components/Sidebar/Sidebar";
+import {AppLayout} from "./components/AppLayout";
 
 
 function App() {
@@ -55,10 +54,9 @@ function App() {
                             </PublicRoute>
                         }
                     />
-                    <Route path="/" element={<NavBar/>}>
+                    <Route path="/" element={<AppLayout/>}>
                         <Route path="/" element={
                             <Authenticated>
-                                <Sidebar/>
                                 <Dashboard/>
                             </Authenticated>
                         }

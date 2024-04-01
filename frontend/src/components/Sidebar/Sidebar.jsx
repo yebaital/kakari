@@ -1,55 +1,42 @@
-import {
-    Button,
-    Drawer,
-    DrawerBody,
-    DrawerContent,
-    DrawerHeader,
-    DrawerOverlay,
-    Flex,
-    List,
-    ListItem
-} from "@chakra-ui/react";
+import {Box, Button, Flex, List, Text} from "@chakra-ui/react";
+import {FaBars, FaTasks, FaUser} from "react-icons/fa";
 import {Icon} from "@chakra-ui/icons";
-import {FaUser, FaTasks} from "react-icons/fa";
-import {useState} from "react";
 
-const menuItems = [
-    {id: 1, name: 'Dashboard', icon: FaUser},
-    {id: 2, name: 'Item 2', icon: FaTasks},
-];
+export const Sidebar = ({isCollapsed, onToggleCollapse}) => {
 
+    const menuItems = [
+        {id: 1, name: 'Dashboard', icon: FaUser},
+        {id: 2, name: 'Item 2', icon: FaTasks},
+    ];
 
-export const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(false);  // Setting the initial state of the sidebar as 'closed'
+    if (isCollapsed) {
+        // Sidebar collapsed: render only icons
+        return (
+            <Flex direction="column" alignItems="center">
+                <Button onClick={onToggleCollapse}>
+                    <FaBars/>
+                </Button>
+                {menuItems.map(item => (
+                    <Icon minW='60px' as={item.icon}/>
+                ))}
+            </Flex>
+        );
+    }
 
-    const onOpen = () => {
-        setIsOpen(true); // When we want to open the sidebar
-    };
-
-    const onClose = () => {
-        setIsOpen(false); // When we want to close the sidebar
-    };
+    // Sidebar not collapsed: render full content
     return (
-        <Flex flexGrow={1} overflow="auto">
-            {/* Sidebar */}
-            <Button onClick={onOpen}>Open sidebar</Button>
-            <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-                <DrawerOverlay>
-                    <DrawerContent>
-                        <DrawerHeader>Sidebar</DrawerHeader>
-                        <DrawerBody>
-                            <List spacing={3} color="white">
-                                {menuItems.map(item => (
-                                    <ListItem key={item.id} alignItems="center">
-                                        <Icon as={item.icon}/>
-                                        {item.name}
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </DrawerBody>
-                    </DrawerContent>
-                </DrawerOverlay>
-            </Drawer>
-        </Flex>
-    )
-}
+        <Box>
+            <Button onClick={onToggleCollapse}>
+                <FaBars/>
+            </Button>
+            <List spacing={3}>
+                {menuItems.map(item => (
+                    <Flex alignItems="center">
+                        <Box as={item.icon} fontSize="20px" mr={2} />
+                        <Text>{item.name}</Text>
+                    </Flex>
+                ))}
+            </List>
+        </Box>
+    );
+};
